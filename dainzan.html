@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>点赞</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .main {
+            width: 998px;
+            min-height: 600px;
+            margin: auto;
+            border: 1px solid #999;
+            text-align: center;
+        }
+        .icon {
+            display: inline-block;
+            margin: auto;
+            width: 48px;
+            height: 56px;
+            overflow: hidden;
+            background: url("icon.png") no-repeat;
+            /*background-position: 0 0;*/
+            background-position-x: 0;
+            background-position-y: 0;
+            -webkit-background-size: 966px,56px;
+            background-size: 966px,56px;
+            cursor: pointer;
+        }
+        .icon.active {
+            background-position-x: 0;
+            background-position-y: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <span class="icon"></span>
+</div>
+<script>
+    window.onload = function () {
+        const icon = document.getElementsByClassName('icon')[0];
+        icon.onclick = function () {
+            const iconName = icon.className;
+            // 已赞，取消点赞
+            if (icon.className.indexOf('active') != -1){
+                icon.className = 'icon';
+                icon.style.backgroundPositionX = '0px';
+            }
+            else{
+                // 点赞
+                var i = 0;
+                const timer = setInterval(function () {
+                    i++;
+                    icon.style.backgroundPositionX = '-'+ i * 46 + 'px';
+                    if (i == 20){
+                        clearInterval(timer);
+                        icon.className = 'icon active';
+                    }
+                }, 25);
+            }
+        }
+    }
+</script>
+</body>
+</html>
